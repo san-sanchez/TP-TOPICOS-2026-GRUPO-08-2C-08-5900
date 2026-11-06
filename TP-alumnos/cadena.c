@@ -4,99 +4,184 @@
 /*            FUNCIONES A IMPLEMENTAR POR EL ALUMNO (version _ALU)             */
 /*============================================================================*/
 
-/******************************************************************************
-Descripcion:    normaliza un campo Apellidos y Nombres segun el Anexo A.2 (con
-                regla de coma).
-Parametros:     s: cadena a normalizar (se modifica in place).
-Retorno:        No posee.
-Observaciones:  -
-******************************************************************************/
-void arreglar_apyn_ALU(char *s)
+int normalizar_segmento_ALU(const char *origen, size_t longitud,
+                            char *destino, size_t tam_destino)
 {
-    /* TODO: reemplazar esta llamada a la funcion de la catedra por su propia
-       implementacion. En la entrega no puede quedar ninguna llamada a una
-       funcion de la biblioteca que tenga version _ALU. */
-    //arreglar_apyn(s);
-    char  temp[TAM_CADENA_AUX] = {0};  /* cadena temporal */
-    char *p_ori = s;                   /* puntero a la cadena origen */
-    char *p_dst = temp;                /* puntero a la cadena destino */
-    int   hay_coma;                    /* flag: la entrada ya trae la coma */
-    int   coma_puesta = 0;             /* flag: ya se escribio la ", " */
-    int   nueva_palabra = 1;           /* flag: el proximo caracter inicia palabra */
+    size_t i, j = 0;
+    int nueva_palabra = 1;
 
-    if(s == NULL)
-        return;
+    if (origen == NULL || destino == NULL || tam_destino == 0)
+        return 0;
 
-    /* si la entrada trae coma se respeta su lugar (apellidos compuestos);
-       si no la trae, se agrega despues de la primera palabra */
-    hay_coma = (strchr(s, ',') != NULL);
+    destino[0] = '\0';
 
-    /* doble corte: fin de la cadena origen o temporal llena */
-    while(*p_ori != '\0' && (p_dst - temp) < TAM_CADENA_AUX - 2)
+    for (i = 0; i < longitud; i++)
     {
-        if(*p_ori == ',')
-        {
-            /* solo la primera coma y si no estamos al principio de todo */
-            if(!coma_puesta && p_dst > temp)
-            {
-                if(*(p_dst - 1) == ' ')     /* saca el espacio antes de la coma */
-                    p_dst--;
-                *p_dst++ = ',';
-                *p_dst++ = ' ';
-                coma_puesta = 1;
-                nueva_palabra = 1;
-            }
-        }
-        else if(isspace((unsigned char)*p_ori))
-        {
-            /* no al principio, no repetir espacios y no dejar espacio
-               despues de un apostrofo */
-            if(p_dst > temp && *(p_dst - 1) != ' ' && *(p_dst - 1) != '\'')
-            {
-                if(!hay_coma && !coma_puesta)
-                {
-                    /* termino la primera palabra y no hay coma: se agrega */
-                    *p_dst++ = ',';
-                    *p_dst++ = ' ';
-                    coma_puesta = 1;
-                }
-                else
-                    *p_dst++ = ' ';     /* un unico espacio entre palabras */
+        unsigned char c = (unsigned char)origen[i];
 
-                nueva_palabra = 1;
+        if (isspace(c))
+        {
+            if (j > 0 && destino[j - 1] != ' ')
+            {
+                if (j + 1 >= tam_destino)
+                {
+                    destino[0] = '\0';
+                    return 0;
+                }
+
+                destino[j++] = ' ';
             }
+
+            nueva_palabra = 1;
         }
         else
         {
-            /* letra (u otro caracter): mayuscula si inicia palabra */
-            if(nueva_palabra)
+            if (j + 1 >= tam_destino)
             {
-                *p_dst++ = toupper((unsigned char)*p_ori);
-                nueva_palabra = 0;
+                destino[0] = '\0';
+                return 0;
             }
-            else
-                *p_dst++ = tolower((unsigned char)*p_ori);
 
-            /* despues de un apostrofo arranca palabra: D'Angelo, O'Brien */
-            if(*p_ori == '\'')
-                nueva_palabra = 1;
+            destino[j++] = nueva_palabra ?
+                           (char)toupper(c) : (char)tolower(c);
+
+            nueva_palabra = (c == '\'');
         }
-        p_ori++;
     }
 
-    /* si termino con un espacio o una coma suelta, se retrocede */
-    if(p_dst > temp && *(p_dst - 1) == ' ')
-        p_dst--;
-    if(p_dst > temp && *(p_dst - 1) == ',')
-        p_dst--;
-    *p_dst = '\0';
+    if (j > 0 && destino[j - 1] == ' ')
+        j--;
 
-    /* copia la cadena ya formateada sobre la original */
-    p_ori = s;
-    p_dst = temp;
-    while(*p_dst != '\0')
-        *p_ori++ = *p_dst++;
-    *p_ori = '\0';
+    destino[j] = '\0';
+
+    return j > 0;
+}
+
+
+int normalizar_apyn_ALU(const char *origen, char *destino,
+                        size_t tam_destino)
+{
+    char entrada[TAM_CADENA_AUX];
+    char apellido[TAM_CADENA_AUX];
+    char nombres[TAM_CADENA_AUX];
+    char completo[TAM_CADENA_AUX];
+
+    const char *coma;
+    const char *segunda_coma;
+    const char *separador;
+
+    size_t longitud;
+    size_t longitud_apellido;
+    size_t longitud_nombres;
+
+    if (destino == NULL || tam_destino == 0)
+        return 0;
+
+    if (origen == NULL)
+    {
+        destino[0] = '\0';
+        return 0;
+    }
+
+    /* Permite que origen y destino sean el mismo arreglo. */
+    longitud = strlen(origen);
+
+    if (longitud >= sizeof(entrada))
+    {
+        destino[0] = '\0';
+        return 0;
+    }
+
+    memcpy(entrada, origen, longitud + 1);
+
+    origen = entrada;
+    destino[0] = '\0';
+
+    coma = strchr(origen, ',');
+
+    if (coma != NULL)
+    {
+        segunda_coma = strchr(coma + 1, ',');
+
+        /* Solo se admite una coma separadora. */
+        if (segunda_coma != NULL)
+            return 0;
+
+        if (!normalizar_segmento_ALU(
+                    origen,
+                    (size_t)(coma - origen),
+                    apellido,
+                    sizeof(apellido)) ||
+
+                !normalizar_segmento_ALU(
+                    coma + 1,
+                    longitud - (size_t)(coma + 1 - origen),
+                    nombres,
+                    sizeof(nombres)))
+            return 0;
+    }
+    else
+    {
+        /* Si no hay coma, se agrega después de la primera palabra. */
+        if (!normalizar_segmento_ALU(
+                    origen,
+                    longitud,
+                    completo,
+                    sizeof(completo)))
+            return 0;
+
+        separador = strchr(completo, ' ');
+
+        if (separador == NULL)
+            return 0;
+
+        longitud_apellido = (size_t)(separador - completo);
+
+        memcpy(apellido, completo, longitud_apellido);
+        apellido[longitud_apellido] = '\0';
+
+        while (*separador == ' ')
+            separador++;
+
+        if (*separador == '\0')
+            return 0;
+
+        if (strlen(separador) >= sizeof(nombres))
+            return 0;
+
+        strcpy(nombres, separador);
+    }
+
+    longitud_apellido = strlen(apellido);
+    longitud_nombres = strlen(nombres);
+
+    /*
+     * apellido + coma + espacio + nombres + '\0'.
+     * El campo permite como máximo 60 caracteres.
+     */
+    if (longitud_apellido + 2 + longitud_nombres >= tam_destino)
+        return 0;
+
+    memcpy(destino, apellido, longitud_apellido);
+
+    destino[longitud_apellido] = ',';
+    destino[longitud_apellido + 1] = ' ';
+
+    memcpy(destino + longitud_apellido + 2,
+           nombres,
+           longitud_nombres + 1);
+
+    return 1;
+}
+
+
+void arreglar_apyn_ALU(char *s)
+{
+    if (s == NULL)
+        return;
+
+    if (!normalizar_apyn_ALU(s, s, TAM_APYN_NORMALIZADO))
+        s[0] = '\0';
 }
 
 /******************************************************************************

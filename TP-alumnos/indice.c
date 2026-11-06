@@ -90,48 +90,65 @@ Retorno:        OK si la operacion fue exitosa y ERROR en caso contrario
                 (clave duplicada o falta de memoria).
 Observaciones:  -
 ******************************************************************************/
-int indice_insertar_ALU(t_indice *indice, const void *registro, size_t tamanyo,
+int indice_insertar_ALU(t_indice *indice, const void *registro,
+                        size_t tamanyo,
                         int (*cmp)(const void *, const void *))
 {
-    /* TODO: reemplazar esta llamada a la funcion de la catedra por su propia
-       implementacion. En la entrega no puede quedar ninguna llamada a una
-       funcion de la biblioteca que tenga version _ALU. */
-    unsigned i = 0, j;
-    unsigned ce;
+    size_t li = 0;
+    size_t ls;
+    size_t medio;
+    size_t posicion;
+    size_t ce;
     char *base;
 
-    if (indice == NULL || registro == NULL ||
-            cmp == NULL || tamanyo == 0)
+    if (indice == NULL || registro == NULL || cmp == NULL ||
+            tamanyo == 0 || indice->vindice == NULL ||
+            indice->cantidad_elementos_actual >
+            indice->cantidad_elementos_maxima)
         return ERROR;
 
     ce = indice->cantidad_elementos_actual;
+    ls = ce;
     base = (char *)indice->vindice;
 
-    while (i < ce &&
-            cmp(base + i * tamanyo, registro) < 0)
-        i++;
+    /* Buscar la primera posición cuyo elemento sea >= registro. */
+    while (li < ls)
+    {
+        medio = li + (ls - li) / 2;
 
-    if (i < ce &&
-            cmp(base + i * tamanyo, registro) == 0)
+        if (cmp(base + medio * tamanyo, registro) < 0)
+            li = medio + 1;
+        else
+            ls = medio;
+    }
+
+    posicion = li;
+
+    /* No permitir claves duplicadas. */
+    if (posicion < ce &&
+            cmp(base + posicion * tamanyo, registro) == 0)
         return ERROR;
 
+    /* Si está lleno, ampliar la capacidad un 30 %. */
     if (indice_lleno_ALU(indice) &&
-            !indice_redimensionar_ALU(indice, tamanyo))
+            indice_redimensionar_ALU(indice, tamanyo) != OK)
         return ERROR;
 
     base = (char *)indice->vindice;
 
-    for (j = ce; j > i; j--)
-        memcpy(base + j * tamanyo,
-               base + (j - 1) * tamanyo,
-               tamanyo);
+    /* Desplazar los elementos para abrir el lugar de inserción. */
+    if (posicion < ce)
+    {
+        memmove(base + (posicion + 1) * tamanyo,
+                base + posicion * tamanyo,
+                (ce - posicion) * tamanyo);
+    }
 
-    memcpy(base + i * tamanyo, registro, tamanyo);
+    memcpy(base + posicion * tamanyo, registro, tamanyo);
 
     indice->cantidad_elementos_actual++;
 
     return OK;
-    //return indice_insertar(indice, registro, tamanyo, cmp);
 }
 
 /******************************************************************************
@@ -144,41 +161,59 @@ Parametros:     indice: TDA indice.
 Retorno:        OK si la operacion fue exitosa y ERROR si la clave no existe.
 Observaciones:  -
 ******************************************************************************/
-int indice_eliminar_ALU(t_indice *indice, const void *registro, size_t tamanyo,
+int indice_eliminar_ALU(t_indice *indice, const void *registro,
+                        size_t tamanyo,
                         int (*cmp)(const void *, const void *))
 {
-    /* TODO: reemplazar esta llamada a la funcion de la catedra por su propia
-       implementacion. En la entrega no puede quedar ninguna llamada a una
-       funcion de la biblioteca que tenga version _ALU. */
-    unsigned i, j;
+    size_t li = 0;
+    size_t ls;
+    size_t medio;
+    size_t posicion;
+    size_t ce;
     char *base;
 
     if (indice == NULL || registro == NULL || cmp == NULL ||
-            tamanyo == 0 || indice->vindice == NULL)
+            tamanyo == 0 || indice->vindice == NULL ||
+            indice->cantidad_elementos_actual >
+            indice->cantidad_elementos_maxima)
+        return ERROR;
+
+    ce = indice->cantidad_elementos_actual;
+
+    if (ce == 0)
         return ERROR;
 
     base = (char *)indice->vindice;
+    ls = ce;
 
-    i = 0;
+    /* Buscar la clave mediante búsqueda binaria. */
+    while (li < ls)
+    {
+        medio = li + (ls - li) / 2;
 
-    while (i < indice->cantidad_elementos_actual &&
-            cmp(registro, base + i * tamanyo) != 0)
-        i++;
+        if (cmp(base + medio * tamanyo, registro) < 0)
+            li = medio + 1;
+        else
+            ls = medio;
+    }
 
-    if (i == indice->cantidad_elementos_actual)
+    posicion = li;
+
+    if (posicion == ce ||
+            cmp(base + posicion * tamanyo, registro) != 0)
         return ERROR;
 
-    for (j = i; j < indice->cantidad_elementos_actual - 1; j++)
-        memcpy(base + j * tamanyo,
-               base + (j + 1) * tamanyo,
-               tamanyo);
+    /* Compactar el arreglo después de eliminar el elemento. */
+    if (posicion + 1 < ce)
+    {
+        memmove(base + posicion * tamanyo,
+                base + (posicion + 1) * tamanyo,
+                (ce - posicion - 1) * tamanyo);
+    }
 
     indice->cantidad_elementos_actual--;
 
     return OK;
-
-
-    //return indice_eliminar(indice, registro, tamanyo, cmp);
 }
 
 /******************************************************************************

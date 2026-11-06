@@ -21,6 +21,13 @@
 #define EDAD_MINIMA 10
 
 #define CANT_PLANES 4
+enum
+{
+    INDICE_PLAN_BASIC = 0,
+    INDICE_PLAN_PREMIUM,
+    INDICE_PLAN_VIP,
+    INDICE_PLAN_FAMILY
+};
 #define DIA_LIMITE_CUOTA 10
 
 typedef struct

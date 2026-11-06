@@ -22,5 +22,5 @@ int novedades_procesar(t_indice *indice, const char *path_novedades,
 
 int novedades_procesar_ALU(t_indice *indice, const char *path_novedades,
                        const char *path_titulos, const t_fecha *fecha_proceso);
-
+const char *novedad_motivo_validacion_ALU(const char *tipo_error);
 #endif /* NOVEDAD_H_INCLUDED */

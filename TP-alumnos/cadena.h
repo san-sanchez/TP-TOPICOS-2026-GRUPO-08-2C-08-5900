@@ -18,8 +18,16 @@ void copiar_cadena(char *dest, const char *orig, size_t tam);
 /*            FUNCIONES A IMPLEMENTAR POR EL ALUMNO (version _ALU)             */
 /*============================================================================*/
 
-#define TAM_CADENA_AUX 512     /* buffer temporal de arreglar_apyn_ALU */
+#define TAM_CADENA_AUX 512
+#define TAM_APYN_NORMALIZADO 61
 
+int normalizar_segmento_ALU(const char *origen, size_t longitud,
+                            char *destino, size_t tam_destino);
+
+int normalizar_apyn_ALU(const char *origen, char *destino,
+                        size_t tam_destino);
+
+void arreglar_apyn_ALU(char *s);
 void arreglar_apyn_ALU(char *s);
 int separar_campos_ALU(char *linea, char *campos[], int max);
 

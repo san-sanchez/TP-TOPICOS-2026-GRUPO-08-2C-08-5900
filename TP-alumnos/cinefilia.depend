@@ -156,3 +156,317 @@
 	<string.h>
 	"validaciones.h"
 
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\alquiler.c
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<limits.h>
+	"alquiler.h"
+	"cadena.h"
+	"util.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\alquiler.h
+	"socio.h"
+	"titulo.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\socio.h
+	<stdio.h>
+	"fecha.h"
+	"indice.h"
+	"lectura.h"
+	"validaciones.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\fecha.h
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	<time.h>
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\indice.h
+	<stddef.h>
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\lectura.h
+	<stdio.h>
+	"indice.h"
+	"fecha.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\validaciones.h
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\titulo.h
+	<stdio.h>
+	"indice.h"
+	"lectura.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\cadena.h
+	<string.h>
+	<ctype.h>
+	<stddef.h>
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\util.h
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"fecha.h"
+	"alquiler.h"
+	"cadena.h"
+	"config.h"
+	"indice.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\config.h
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\auditoria.c
+	"auditoria.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\auditoria.h
+	"fecha.h"
+	"lectura.h"
+	"cadena.h"
+	"util.h"
+	"indice.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\cadena.c
+	"cadena.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\fecha.c
+	"fecha.h"
+	"util.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\indice.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	"indice.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\lectura.c
+	<string.h>
+	<limits.h>
+	"lectura.h"
+	"util.h"
+	"cadena.h"
+	"socio.h"
+	"titulo.h"
+	"config.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"config.h"
+	"util.h"
+	"menu.h"
+	"fecha.h"
+	"indice.h"
+	"lectura.h"
+	"socio.h"
+	"titulo.h"
+	"novedad.h"
+	"alquiler.h"
+	"auditoria.h"
+	"generador.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\menu.h
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\novedad.h
+	"titulo.h"
+
+1793752934 c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\generador.h
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\novedad.c
+	<limits.h>
+	<stdio.h>
+	<string.h>
+	"novedad.h"
+	"lectura.h"
+	"titulo.h"
+	"indice.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\socio.c
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"socio.h"
+	"cadena.h"
+	"util.h"
+	"auditoria.h"
+	"config.h"
+	"menu.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\titulo.c
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<limits.h>
+	"titulo.h"
+	"cadena.h"
+	"util.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\util.c
+	"util.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-alumnos__3_ (1)\tp-alumnos\validaciones.c
+	<ctype.h>
+	<stdio.h>
+	<string.h>
+	"validaciones.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\alquiler.c
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<limits.h>
+	"alquiler.h"
+	"cadena.h"
+	"util.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\alquiler.h
+	"socio.h"
+	"titulo.h"
+
+1793755108 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\socio.h
+	<stdio.h>
+	"fecha.h"
+	"indice.h"
+	"lectura.h"
+	"validaciones.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\fecha.h
+	<stdio.h>
+	<string.h>
+	<ctype.h>
+	<time.h>
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\indice.h
+	<stddef.h>
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\lectura.h
+	<stdio.h>
+	"indice.h"
+	"fecha.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\validaciones.h
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\titulo.h
+	<stdio.h>
+	"indice.h"
+	"lectura.h"
+
+1793754734 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\cadena.h
+	<string.h>
+	<ctype.h>
+	<stddef.h>
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\util.h
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"fecha.h"
+	"alquiler.h"
+	"cadena.h"
+	"config.h"
+	"indice.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\config.h
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\auditoria.c
+	"auditoria.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\auditoria.h
+	"fecha.h"
+	"lectura.h"
+	"cadena.h"
+	"util.h"
+	"indice.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1793754814 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\cadena.c
+	"cadena.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\fecha.c
+	"fecha.h"
+	"util.h"
+
+1793760759 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\indice.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	"indice.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\lectura.c
+	<string.h>
+	<limits.h>
+	"lectura.h"
+	"util.h"
+	"cadena.h"
+	"socio.h"
+	"titulo.h"
+	"config.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"config.h"
+	"util.h"
+	"menu.h"
+	"fecha.h"
+	"indice.h"
+	"lectura.h"
+	"socio.h"
+	"titulo.h"
+	"novedad.h"
+	"alquiler.h"
+	"auditoria.h"
+	"generador.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\menu.h
+
+1793760791 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\novedad.h
+	"titulo.h"
+
+1793752934 c:\users\ignacio\desktop\tp-entregado\tp-alumnos\generador.h
+
+1793763939 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\novedad.c
+	<limits.h>
+	<stdio.h>
+	<string.h>
+	"novedad.h"
+	"lectura.h"
+	"titulo.h"
+	"indice.h"
+
+1793763789 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\socio.c
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	"socio.h"
+	"cadena.h"
+	"util.h"
+	"auditoria.h"
+	"config.h"
+	"menu.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\titulo.c
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<limits.h>
+	"titulo.h"
+	"cadena.h"
+	"util.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\util.c
+	"util.h"
+
+1793752934 source:c:\users\ignacio\desktop\tp-entregado\tp-alumnos\validaciones.c
+	<ctype.h>
+	<stdio.h>
+	<string.h>
+	"validaciones.h"
+
